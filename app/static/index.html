@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML API Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ML API Dashboard</h1>
+            <p>Makine Öğrenmesi Servisi Yönetim Paneli</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="upload">📁 Veri Yükle</button>
+            <button class="tab-btn" data-tab="config">⚙️ Konfigürasyon</button>
+            <button class="tab-btn" data-tab="train">🚀 Eğitim</button>
+            <button class="tab-btn" data-tab="predict">🔮 Tahmin</button>
+            <button class="tab-btn" data-tab="metrics">📊 Metrikler</button>
+        </nav>
+
+        
+        <div id="upload" class="tab-content active">
+            <h2>Excel Dosyası Yükle</h2>
+            <div class="upload-area">
+                <input type="file" id="fileInput" accept=".xlsx" />
+                <button onclick="uploadFile()" class="btn btn-primary">Yükle</button>
+            </div>
+            <div id="uploadResult" class="result-area"></div>
+        </div>
+
+        
+        <div id="config" class="tab-content">
+            <h2>Model Konfigürasyonu</h2>
+            <div class="form-group">
+                <label>Algoritma:</label>
+                <select id="algorithm">
+                    <option value="classification">Logistic Regression</option>
+                    <option value="linearsvc">Linear SVC</option>
+                    <option value="randomforest">Random Forest</option>
+                    <option value="ann">Neural Network (ANN)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Hiperparametreler (JSON):</label>
+                <textarea id="hyperparameters" placeholder='{"C": 1.0, "penalty": "l2"}'></textarea>
+            </div>
+            <button onclick="saveConfig()" class="btn btn-primary">Kaydet</button>
+            <div id="configResult" class="result-area"></div>
+        </div>
+
+       
+        <div id="train" class="tab-content">
+            <h2>Model Eğitimi</h2>
+            <button onclick="startTraining()" class="btn btn-success">Eğitimi Başlat</button>
+            <div id="trainResult" class="result-area"></div>
+        </div>
+
+        
+        <div id="predict" class="tab-content">
+            <h2>Tahmin Yap</h2>
+            <div class="form-group">
+                <label>Company Code:</label>
+                <input type="text" id="companyCode" value="1504" />
+            </div>
+            <div class="form-group">
+                <label>Document Number:</label>
+                <input type="text" id="documentNumber" value="4200004825" />
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <input type="text" id="description" value="Test açıklama" />
+            </div>
+            <div class="form-group">
+                <label>Payment Type:</label>
+                <input type="text" id="paymentType" value="H" />
+            </div>
+            <div class="form-group">
+                <label>Amount:</label>
+                <input type="number" id="amount" value="1000" step="0.01" />
+            </div>
+            <div class="form-group">
+                <label>Currency Code:</label>
+                <input type="text" id="currencyCode" value="TRY" maxlength="3" />
+            </div>
+            <div class="form-group">
+                <label>Transaction Type:</label>
+                <input type="text" id="transactionType" value="NEFT" />
+            </div>
+            <button onclick="makePrediction()" class="btn btn-primary">Tahmin Et</button>
+            <div id="predictResult" class="result-area"></div>
+        </div>
+
+        
+        <div id="metrics" class="tab-content">
+            <h2>Model Metrikleri</h2>
+            <button onclick="loadMetrics()" class="btn btn-info">Metrikleri Yükle</button>
+            <div id="metricsResult" class="result-area"></div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
