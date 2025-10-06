@@ -8,11 +8,11 @@ from app.utils.logger import get_logger
 
 
 # Excel file upload and CSV conversion
-router = APIRouter(tags=["Upload"])
+router = APIRouter(prefix="/upload", tags=["Upload"])
 logger = get_logger()
 
 
-@router.post("/upload")
+@router.post("")
 async def upload_excel(file: UploadFile = File(...)):
     filename = (file.filename or "").strip()
     if not filename.lower().endswith(".xlsx"):

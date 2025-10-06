@@ -6,11 +6,11 @@ from app.services.prediction import PredictionService
 
 
 # This router, API receives a single prediction request, validates it against the schema and uses the trained model to calculate the prediction and return it as JSON.
-router = APIRouter(tags=["Predict"])
+router = APIRouter(prefix="/predict", tags=["Predict"])
 logger = get_logger()
 
 # Our goal here is to validate the input data with PredictPayload and pass it to PredictionService to calculate the prediction for a single example and return it as JSON.
-@router.post("/predict")
+@router.post("")
 def predict(payload: PredictPayload):
     try:
         pred = PredictionService().predict_one(payload)

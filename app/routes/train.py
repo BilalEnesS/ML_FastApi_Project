@@ -6,12 +6,12 @@ from app.utils.logger import get_logger
 from app.services.training import TrainingService
 
 
-router = APIRouter(tags=["Train"])
+router = APIRouter(prefix="/train", tags=["Train"])
 logger = get_logger()
 store = ConfigStore()
 
 # Model training endpoint
-@router.post("/train")
+@router.post("")
 def start_training():
     
     cfg = store.load()
